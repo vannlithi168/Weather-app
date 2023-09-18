@@ -10,6 +10,24 @@ import axios from "axios";
 function CurrentWeather({ city }) {
   const [currentWeather, setCurrentWeather] = useState(null);
 
+  function convertTime(unixTimestamp) {
+    const sunsetDate = new Date(unixTimestamp * 1000);
+    const hours = sunsetDate.getHours() % 12 || 12;
+    const minutes = sunsetDate.getMinutes();
+
+    return `${hours}:${minutes < 10 ? "0" : ""}${minutes}pm`;
+  }
+
+  function convertDate(unixTimestamp) {
+    const date = new Date(unixTimestamp * 1000);
+    const options = {
+      year: "numeric",
+      month: "short",
+      day: "numeric",
+    };
+    return date.toLocaleDateString(undefined, options);
+  }
+
   useEffect(() => {
     const fetchCurrentWeather = async () => {
       try {
@@ -55,7 +73,7 @@ function CurrentWeather({ city }) {
         <div>
           <div className="today">
             <p>Feels Like {Math.round(currentWeather.main.feels_like)}°</p>
-            <p>Today {currentWeather.dt}</p>
+            <p>Today {convertDate(currentWeather.dt)}</p>
           </div>
 
           <div className="detail">
@@ -65,7 +83,7 @@ function CurrentWeather({ city }) {
                 <p className="info-label">
                   Sunset
                   <br />
-                  {currentWeather.sys.sunset}
+                  {convertTime(currentWeather.sys.sunset)}
                 </p>
               </div>
             </div>
