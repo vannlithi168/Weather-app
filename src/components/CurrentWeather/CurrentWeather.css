@@ -69,3 +69,25 @@
   color: #000000;
   margin-top: 0px;
 }
+
+@media (max-width: 768px) {
+  .icon {
+    width: 200px;
+  }
+
+  .temperature {
+    font-size: 100px;
+  }
+  .city-name {
+    font-size: 40px;
+  }
+}
+
+@media (max-width: 320px) {
+  .icon {
+    width: 120px;
+  }
+  .temperature {
+    font-size: 90px;
+  }
+}
