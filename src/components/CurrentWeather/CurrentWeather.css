@@ -1,0 +1,71 @@
+.city-name {
+  color: white;
+  font-size: 50px;
+  font-weight: 600;
+  margin: 0;
+}
+
+.description {
+  margin: 0;
+  margin-bottom: 0px;
+  color: white;
+  align-items: center;
+}
+
+.current-weather {
+  color: white;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  margin-top: 20px;
+}
+
+.temperature {
+  font-size: 120px;
+  background: linear-gradient(to right, #fefefe, #13d1ef);
+  -webkit-text-fill-color: transparent;
+  -webkit-background-clip: text;
+  background-clip: value;
+  margin: 10px 0;
+  font-weight: 600;
+  margin-left: -40px;
+  margin-top: 60px;
+}
+
+.today {
+  color: white;
+  font-size: 20px;
+  margin: 0;
+  padding: 0 5px;
+  font-weight: 600;
+}
+
+.detail {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+.info {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  background-color: rgba(7, 80, 93, 0.5);
+  margin-bottom: 10px;
+  width: 100%;
+  height: 150px;
+}
+
+.info-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.info-label {
+  font-size: 16px;
+  color: #000000;
+  margin-top: 0px;
+}

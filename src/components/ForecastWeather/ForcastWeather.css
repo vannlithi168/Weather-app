@@ -1,0 +1,22 @@
+.card-container {
+  color: rgb(255, 255, 255);
+  background-color: rgb(13, 77, 88);
+  margin-bottom: 10px;
+  border-radius: 20px;
+}
+
+.card {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  height: 80px;
+}
+
+.temp {
+  font-size: 20px;
+}
+
+.icon-forecast {
+  width: 100px;
+}
