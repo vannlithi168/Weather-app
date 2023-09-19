@@ -49,13 +49,13 @@ To run this project locally, follow these steps:
 
 ## Features
 
-- Weather Search: Get weather data for any city worldwide.
-- Current Weather Display: See current weather details, including temperature, weather description, and more.
-- Weather Forecast: View a short-term weather forecast.
-- Error Handling: Receive feedback for invalid city names or network errors.
-- API Integration: Utilizes Axios to fetch weather data from OpenWeatherMap.
-- Styling: Stylish and user-friendly interface.
-- Loading Indicator: Provides a "Loading..." message during data retrieval.
+- **Weather Search**: Get weather data for any city worldwide.
+- **Current Weather Display**: See current weather details, including temperature, weather description, and more.
+- **Weather Forecast**: View a short-term weather forecast.
+- **Error Handling**: Receive feedback for invalid city names or network errors.
+- **API Integration**: Utilizes Axios to fetch weather data from OpenWeatherMap.
+- **Styling**: Stylish and user-friendly interface.
+- **Loading Indicator**: Provides a "Loading..." message during data retrieval.
 
 ## Technology and Library
 
@@ -83,6 +83,8 @@ To run this project locally, follow these steps:
 - [API Lesson](link): Lesson on working with APIs.
 
 - [OpenweatherMap](link): Getting data from this website.
+
+- [Weather Icon Figma](https://www.figma.com/file/ukW2xDvC9z4y0HxJbqBdZ5/Weather-icons-(Community)?type=design&node-id=0-1&mode=design&t=OrbIrAK2VsD9LZsV-0): Figma Community
 
 Other sources from YouTube, Google and more.
 
