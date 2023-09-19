@@ -21,6 +21,8 @@
   width: 100px;
 }
 
+
+
 @media (max-width: 360px) {
   .icon-forecast {
     width: 60px;
