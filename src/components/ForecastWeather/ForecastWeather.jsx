@@ -1,5 +1,5 @@
 /* eslint-disable react/prop-types */
-import "./ForcastWeather.css";
+import  "./ForcastWeather.css";
 import WeatherCard from "../WeatherCard/WeatherCard";
 const WeatherForecast = ({ weatherData }) => {
   const days = [

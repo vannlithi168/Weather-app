@@ -52,7 +52,7 @@ function CurrentWeather({ city }) {
     <div>
       {currentWeather ? (
         <>
-          <p className="city-name">{currentWeather.name}</p>
+          <p className="city-name">{currentWeather.name}, {currentWeather.sys.country}</p>
           <p className="description">{currentWeather.weather[0].description}</p>
           <div className="current-weather">
             <img

@@ -1,65 +1,67 @@
-import { useState, useEffect } from "react";
-import WeatherSearch from "./components/Search/Search";
-import WeatherForecast from "./components/ForecastWeather/ForecastWeather";
-import CurrentWeather from "./components/CurrentWeather/CurrentWeather";
+// App.js
+import { useState, useEffect } from 'react';
+import axios from 'axios';
+import WeatherSearch from './components/Search/Search';
+import WeatherForecast from './components/ForecastWeather/ForecastWeather';
+import CurrentWeather from './components/CurrentWeather/CurrentWeather';
+import CityData from './components/data/city_data.json';
+import './App.css';
+import { API_KEY, API_URL } from './api/api';
+import 'font-awesome/css/font-awesome.min.css';
 
-import "./App.css";
-import axios from "axios";
-import { API_KEY, API_URL } from "./api/api";
 
 const App = () => {
+  const [currentCity, setCurrentCity] = useState('Phnom Penh');
   const [weatherData, setWeatherData] = useState(null);
-  const [currentCity, setCurrentCity] = useState("Phnom Penh");
   const [loading, setLoading] = useState(true);
 
-  const handleWeatherDataUpdate = (data) => {
-    setWeatherData(data);
+  const fetchWeatherData = async (city) => {
+    setLoading(true);
+    try {
+      const response = await axios.get(
+        `${API_URL}?q=${city}&appid=${API_KEY}&units=metric`
+      );
+
+      if (response.status === 200) {
+        setWeatherData(response.data);
+        setLoading(false);
+      } else {
+        setWeatherData(null);
+        setLoading(false);
+      }
+    } catch (error) {
+      console.error("Error fetching data:", error);
+      setWeatherData(null);
+      setLoading(false);
+    }
   };
 
   const handleCityChange = (city) => {
     setCurrentCity(city);
+    fetchWeatherData(city);
   };
 
   useEffect(() => {
-    const fetchDefaultLocationWeather = async () => {
-      try {
-        const response = await axios.get(
-          `${API_URL}?q=${currentCity}&appid=${API_KEY}&units=metric`
-        );
-
-        if (response.status === 200) {
-          setWeatherData(response.data);
-          setLoading(false);
-        } else {
-          setWeatherData(null);
-          setLoading(false);
-        }
-      } catch (error) {
-        console.error("Error fetching data:", error);
-        setWeatherData(null);
-        setLoading(false);
-      }
-    };
-
-    fetchDefaultLocationWeather();
+    fetchWeatherData(currentCity);
   }, [currentCity]);
 
   return (
     <div>
       <WeatherSearch
-        onWeatherDataUpdate={handleWeatherDataUpdate}
         onCityChange={handleCityChange}
+        placeholder="Enter city name"
+        data={CityData}
+        fetchWeatherData={fetchWeatherData}
+        setCurrentCity={setCurrentCity}
       />
       {loading ? (
-        <p>Loading...</p>
+        <div className="loader-container">
+          <div className="loader"></div>
+        </div>
       ) : (
         <>
           <CurrentWeather city={currentCity} />
-
-          <WeatherForecast
-            weatherData={weatherData}
-            handleWeatherDataUpdate={handleWeatherDataUpdate}
-          />
+          <WeatherForecast weatherData={weatherData} />
         </>
       )}
     </div>

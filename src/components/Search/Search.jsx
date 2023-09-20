@@ -1,15 +1,41 @@
+/* eslint-disable no-unused-vars */
 /* eslint-disable react/prop-types */
-import { useState } from "react";
+import  { useState, useEffect } from "react";
 import axios from "axios";
 import { API_KEY, API_URL } from "../../api/api";
 import "./Search.css";
+import SavedSearchIcon from "@mui/icons-material/SavedSearch";
+import CloseIcon from "@mui/icons-material/Close";
 
-const WeatherSearch = ({ onWeatherDataUpdate, onCityChange }) => {
+const WeatherSearch = ({ onWeatherDataUpdate, onCityChange, data, placeholder, setCurrentCity, fetchWeatherData }) => {
   const [city, setCity] = useState("");
   const [error, setError] = useState("");
+  const [filteredData, setFilteredData] = useState([]);
+  const [wordEntered, setWordEntered] = useState("");
 
-  const handleCityChange = (event) => {
-    setCity(event.target.value);
+  const handleCityChange = (city) => {
+    setCity(""); // Clear the input field
+    setFilteredData([]); // Reset the filtered data
+    setCurrentCity(city);
+    fetchWeatherData(city); // Fetch weather data for the selected city
+  };
+
+  const handleFilter = (event) => {
+    const searchWord = event.target.value;
+    setWordEntered(searchWord);
+    const newFilter = data.filter((value) => {
+      return value.name.toLowerCase().includes(searchWord.toLowerCase());
+    });
+    if (searchWord === "") {
+      setFilteredData([]);
+    } else {
+      setFilteredData(newFilter);
+    }
+  };
+
+  const clearInput = () => {
+    setFilteredData([]);
+    setWordEntered("");
   };
 
   const handleSubmit = async (event) => {
@@ -40,25 +66,52 @@ const WeatherSearch = ({ onWeatherDataUpdate, onCityChange }) => {
     }
   };
 
-  console.log(city);
+  useEffect(() => {
+    const handleKeyPress = (event) => {
+      if (event.key === "Enter" && filteredData.length > 0) {
+        // Automatically select the first result when Enter is pressed
+        handleCityChange(filteredData[0].name);
+        clearInput();
+      }
+    };
+
+    document.addEventListener("keydown", handleKeyPress);
+
+    return () => {
+      document.removeEventListener("keydown", handleKeyPress);
+    };
+  }, [filteredData]);
 
   return (
-    <div>
-      <form onSubmit={handleSubmit}>
+    <div className="search">
+      <div className="searchInputs">
         <input
-          className="search-container"
           type="text"
-          value={city}
-          onChange={handleCityChange}
-          placeholder="Enter the city"
-          required
+          placeholder={placeholder}
+          onChange={handleFilter}
+          value={wordEntered}
         />
-        <button className="btn" type="submit">
-          Search
-        </button>
-      </form>
-
-      {error && <p>{error}</p>}
+         <div className="searchIcon">
+          {filteredData.length === 0 ? (
+            <SavedSearchIcon />
+          ) : (
+            <CloseIcon id="clearBtn" onClick={clearInput} />
+          )}
+        </div>
+      </div>
+      {filteredData.length !== 0 && (
+        <div className="dataResult">
+          {filteredData.slice(0, 4).map((value, key) => {
+            return (
+              <ul className="dataItem" key={value.id}>
+                <li onClick={() => handleCityChange(value.name)}>
+                  {value.name}, {value.country_name}
+                </li>
+              </ul>
+            );
+          })}
+        </div>
+      )}
     </div>
   );
 };

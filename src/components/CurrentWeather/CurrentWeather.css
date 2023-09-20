@@ -3,6 +3,7 @@
   font-size: 50px;
   font-weight: 600;
   margin: 0;
+  margin-top: 50px;
 }
 
 .description {
@@ -19,18 +20,23 @@
   align-items: center;
   justify-content: center;
   margin-top: 20px;
+  
+  
 }
 
 .temperature {
-  font-size: 120px;
+  font-size: 160px;
   background: linear-gradient(to right, #fefefe, #13d1ef);
   -webkit-text-fill-color: transparent;
   -webkit-background-clip: text;
   background-clip: value;
   margin: 10px 0;
   font-weight: 600;
-  margin-left: -40px;
-  margin-top: 60px;
+  margin-left: 10px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .today {
@@ -72,6 +78,10 @@
   margin-top: 0px;
 }
 
+.icon{
+  width: 300px;
+}
+
 @media (max-width: 768px) {
   .icon {
     width: 200px;
@@ -86,12 +96,12 @@
   }
 }
 
-@media (max-width: 320px) {
+@media (max-width: 414px) {
   .icon {
-    width: 120px;
+    width: 140px;
   }
 
   .temperature {
-    font-size: 90px;
+    font-size: 70px;
   }
 }
