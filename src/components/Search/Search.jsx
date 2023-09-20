@@ -21,9 +21,15 @@ const handleCityChange = (city) => {
   // Reset the filtered data
   setFilteredData([]);
 
+    setWordEntered("");
+
+
   // Update the current city and fetch weather data
   setCurrentCity(city);
   fetchWeatherData(city);
+  
+
+
 };
 
 
