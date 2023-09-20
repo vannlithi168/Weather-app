@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 /* eslint-disable no-unused-vars */
 /* eslint-disable react/prop-types */
 import  { useState, useEffect } from "react";
@@ -13,12 +14,18 @@ const WeatherSearch = ({ onWeatherDataUpdate, onCityChange, data, placeholder, s
   const [filteredData, setFilteredData] = useState([]);
   const [wordEntered, setWordEntered] = useState("");
 
-  const handleCityChange = (city) => {
-    setCity(""); // Clear the input field
-    setFilteredData([]); // Reset the filtered data
-    setCurrentCity(city);
-    fetchWeatherData(city); // Fetch weather data for the selected city
-  };
+const handleCityChange = (city) => {
+  // Clear the input field
+  setCity("");
+
+  // Reset the filtered data
+  setFilteredData([]);
+
+  // Update the current city and fetch weather data
+  setCurrentCity(city);
+  fetchWeatherData(city);
+};
+
 
   const handleFilter = (event) => {
     const searchWord = event.target.value;
@@ -80,7 +87,7 @@ const WeatherSearch = ({ onWeatherDataUpdate, onCityChange, data, placeholder, s
     return () => {
       document.removeEventListener("keydown", handleKeyPress);
     };
-  }, [filteredData]);
+  }, [filteredData, handleCityChange]);
 
   return (
     <div className="search">
@@ -90,6 +97,7 @@ const WeatherSearch = ({ onWeatherDataUpdate, onCityChange, data, placeholder, s
           placeholder={placeholder}
           onChange={handleFilter}
           value={wordEntered}
+          
         />
          <div className="searchIcon">
           {filteredData.length === 0 ? (
