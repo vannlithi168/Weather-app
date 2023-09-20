@@ -1,5 +1,6 @@
 /* eslint-disable react/prop-types */
 import "./ForcastWeather.css";
+import WeatherCard from "../WeatherCard/WeatherCard";
 const WeatherForecast = ({ weatherData }) => {
   const days = [
     "Sunday",
@@ -33,21 +34,13 @@ const WeatherForecast = ({ weatherData }) => {
           <>
             <div className="">
               {forecast.map((item) => (
-                <div className="card-container card" key={item.date}>
-                  <div>
-                    <h3>{item.day}</h3>
-                  </div>
-                  <img
-                    alt="weather"
-                    src={`icons/${item.icon}.svg`}
-                    className="icon-forecast"
-                  />
-
-                  <div>
-                    <p>{item.description}</p>
-                    <p className="temp">{item.temperature}°C</p>
-                  </div>
-                </div>
+                <WeatherCard
+                  key={item.date}
+                  day={item.day}
+                  icon={item.icon}
+                  description={item.description}
+                  temperature={item.temperature}
+                />
               ))}
             </div>
           </>
