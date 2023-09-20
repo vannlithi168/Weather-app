@@ -1,3 +1,4 @@
+/* eslint-disable react/prop-types */
 import "./ForcastWeather.css";
 const WeatherForecast = ({ weatherData }) => {
   const days = [
