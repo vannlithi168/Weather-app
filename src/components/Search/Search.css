@@ -1,6 +1,5 @@
-/* Default styles */
 .searchInputs {
-  margin-top: 105px;
+  margin-top: 50px;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -60,21 +59,16 @@
   margin-left: 10px;
 }
 
-/* Responsive styles */
 @media screen and (max-width: 768px) {
-
-
   .search input {
     width: 70%;
 
   }
 
-
   .dataResult {
     width: 100%;
-
     max-width: 480px;
     margin-top: 10px;
- 
+
   }
 }

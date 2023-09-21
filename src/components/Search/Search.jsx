@@ -1,37 +1,38 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 /* eslint-disable no-unused-vars */
 /* eslint-disable react/prop-types */
-import  { useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 import axios from "axios";
 import { API_KEY, API_URL } from "../../api/api";
 import "./Search.css";
 import SavedSearchIcon from "@mui/icons-material/SavedSearch";
 import CloseIcon from "@mui/icons-material/Close";
 
-const WeatherSearch = ({ onWeatherDataUpdate, onCityChange, data, placeholder, setCurrentCity, fetchWeatherData }) => {
+const WeatherSearch = ({
+  onWeatherDataUpdate,
+  onCityChange,
+  data,
+  placeholder,
+  setCurrentCity,
+  fetchWeatherData,
+}) => {
   const [city, setCity] = useState("");
   const [error, setError] = useState("");
   const [filteredData, setFilteredData] = useState([]);
   const [wordEntered, setWordEntered] = useState("");
 
-const handleCityChange = (city) => {
-  // Clear the input field
-  setCity("");
+  const handleCityChange = (city) => {
+    // Clear the input field
+    setCity("");
 
-  // Reset the filtered data
-  setFilteredData([]);
-
+    // Reset the filtered data
+    setFilteredData([]);
     setWordEntered("");
 
-
-  // Update the current city and fetch weather data
-  setCurrentCity(city);
-  fetchWeatherData(city);
-  
-
-
-};
-
+    // Update the current city and fetch weather data
+    setCurrentCity(city);
+    fetchWeatherData(city);
+  };
 
   const handleFilter = (event) => {
     const searchWord = event.target.value;
@@ -103,9 +104,8 @@ const handleCityChange = (city) => {
           placeholder={placeholder}
           onChange={handleFilter}
           value={wordEntered}
-          
         />
-         <div className="searchIcon">
+        <div className="searchIcon">
           {filteredData.length === 0 ? (
             <SavedSearchIcon />
           ) : (
