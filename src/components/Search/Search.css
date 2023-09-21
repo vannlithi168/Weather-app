@@ -59,6 +59,16 @@
   margin-left: 10px;
 }
 
+.noDataMessage {
+  display: none;
+  color: black;
+
+}
+
+.dataResult.noDataVisible .noDataMessage {
+  display: block;
+}
+
 @media screen and (max-width: 768px) {
   .search input {
     width: 70%;

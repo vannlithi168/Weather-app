@@ -20,6 +20,7 @@ const WeatherSearch = ({
   const [error, setError] = useState("");
   const [filteredData, setFilteredData] = useState([]);
   const [wordEntered, setWordEntered] = useState("");
+  const [showNoData, setShowNoData] = useState(false); // State to control "No data found" visibility
 
   const handleCityChange = (city) => {
     // Clear the input field
@@ -40,10 +41,15 @@ const WeatherSearch = ({
     const newFilter = data.filter((value) => {
       return value.name.toLowerCase().includes(searchWord.toLowerCase());
     });
+
     if (searchWord === "") {
       setFilteredData([]);
+      setShowNoData(false); // Hide "No data found" when the input is empty
     } else {
       setFilteredData(newFilter);
+
+      // Show "No data found" if no matching results
+      setShowNoData(newFilter.length === 0);
     }
   };
 
@@ -102,6 +108,7 @@ const WeatherSearch = ({
         <input
           type="text"
           placeholder={placeholder}
+          onClick={() => setError("")}
           onChange={handleFilter}
           value={wordEntered}
         />
@@ -113,19 +120,20 @@ const WeatherSearch = ({
           )}
         </div>
       </div>
-      {filteredData.length !== 0 && (
-        <div className="dataResult">
-          {filteredData.slice(0, 4).map((value, key) => {
-            return (
-              <ul className="dataItem" key={value.id}>
-                <li onClick={() => handleCityChange(value.name)}>
-                  {value.name}, {value.country_name}
-                </li>
-              </ul>
-            );
-          })}
-        </div>
-      )}
+      <div className={`dataResult ${showNoData ? "noDataVisible" : ""}`}>
+        {filteredData.length === 0 && !error && (
+          <div className="noDataMessage">No data found.</div>
+        )}
+        {filteredData.slice(0, 4).map((value, key) => {
+          return (
+            <ul className="dataItem" key={value.id}>
+              <li onClick={() => handleCityChange(value.name)}>
+                {value.name}, {value.country_name}
+              </li>
+            </ul>
+          );
+        })}
+      </div>
     </div>
   );
 };
