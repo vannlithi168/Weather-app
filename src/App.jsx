@@ -1,17 +1,16 @@
 // App.js
-import { useState, useEffect } from 'react';
-import axios from 'axios';
-import WeatherSearch from './components/Search/Search';
-import WeatherForecast from './components/ForecastWeather/ForecastWeather';
-import CurrentWeather from './components/CurrentWeather/CurrentWeather';
-import CityData from './components/data/city_data.json';
-import './App.css';
-import { API_KEY, API_URL } from './api/api';
-import 'font-awesome/css/font-awesome.min.css';
-
+import { useState, useEffect } from "react";
+import axios from "axios";
+import WeatherSearch from "./components/Search/Search";
+import WeatherForecast from "./components/ForecastWeather/ForecastWeather";
+import CurrentWeather from "./components/CurrentWeather/CurrentWeather";
+import CityData from "./data/city_data.json";
+import "./App.css";
+import { API_KEY, API_URL } from "./api/api";
+import "font-awesome/css/font-awesome.min.css";
 
 const App = () => {
-  const [currentCity, setCurrentCity] = useState('Phnom Penh');
+  const [currentCity, setCurrentCity] = useState("Phnom Penh");
   const [weatherData, setWeatherData] = useState(null);
   const [loading, setLoading] = useState(true);
 
